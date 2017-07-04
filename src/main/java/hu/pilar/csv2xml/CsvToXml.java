@@ -15,7 +15,6 @@
  */
 package hu.pilar.csv2xml;
 
-import com.sun.xml.txw2.output.IndentingXMLStreamWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,11 +34,11 @@ import org.apache.commons.csv.CSVRecord;
  */
 public class CsvToXml {
 
-    final static String CSVENCODING = "UTF-8";
-    final static String XMLENCODING = "UTF-8";
-    final static String XMLVERSION = "1.0";
-    final static String XMLROOT = "data";
-    final static String XMLROW = "record";
+    private static final String CSVENCODING = "UTF-8";
+    private static final String XMLENCODING = "UTF-8";
+    private static final String XMLVERSION = "1.0";
+    private static final String XMLROOT = "data";
+    private static final String XMLROW = "record";
 
     final XMLOutputFactory factory;
 
@@ -48,10 +47,8 @@ public class CsvToXml {
     }
 
     void pipe(InputStream is, OutputStream os) throws XMLStreamException, IOException {
-        XMLStreamWriter writer = new IndentingXMLStreamWriter(
-                factory.createXMLStreamWriter(
-                        new OutputStreamWriter(os)
-                )
+        XMLStreamWriter writer = factory.createXMLStreamWriter(
+                new OutputStreamWriter(os)
         );
 
         try (CSVParser parser = new CSVParser(
@@ -67,14 +64,7 @@ public class CsvToXml {
             writer.writeStartElement(XMLROOT);
             while (recordIt.hasNext()) {
                 writer.writeStartElement(XMLROW);
-                CSVRecord record = recordIt.next();
-                for (int i = 0; i < header.size(); ++i) {
-                    if (!header.get(i).isEmpty() && record.get(i) != null) {
-                        writer.writeStartElement(header.get(i));
-                        writer.writeCharacters(record.get(i));
-                        writer.writeEndElement();
-                    }
-                }
+                writeRecord(header, recordIt.next(), writer);
                 writer.writeEndElement();
             }
             writer.writeEndElement();
@@ -83,6 +73,16 @@ public class CsvToXml {
 
             writer.flush();
             writer.close();
+        }
+    }
+
+    private void writeRecord(CSVRecord header, CSVRecord record, XMLStreamWriter writer) throws XMLStreamException {
+        for (int i = 0; i < header.size(); ++i) {
+            if (!header.get(i).isEmpty() && record.get(i) != null) {
+                writer.writeStartElement(header.get(i));
+                writer.writeCharacters(record.get(i));
+                writer.writeEndElement();
+            }
         }
     }
 }

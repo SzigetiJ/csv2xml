@@ -45,7 +45,7 @@ public class CsvToXmlTest {
     @Test
     public void testPipeNoColumnsNoRecords() throws XMLStreamException, IOException {
         String inputStr = "\n";
-        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                 + "<data></data>\n";
 
         InputStream is = new ByteArrayInputStream(inputStr.getBytes());
@@ -58,9 +58,9 @@ public class CsvToXmlTest {
     @Test
     public void testPipeNoColumns() throws XMLStreamException, IOException {
         String inputStr = "\n\n";
-        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<data>\n"
-                + "  <record></record>\n"
+        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<data>"
+                + "<record></record>"
                 + "</data>\n";
 
         InputStream is = new ByteArrayInputStream(inputStr.getBytes());
@@ -73,7 +73,7 @@ public class CsvToXmlTest {
     @Test
     public void testPipeNoRecord() throws XMLStreamException, IOException {
         String inputStr = "A,B\n";
-        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                 + "<data></data>\n";
 
         InputStream is = new ByteArrayInputStream(inputStr.getBytes());
@@ -86,16 +86,16 @@ public class CsvToXmlTest {
     @Test
     public void testPipeSimple() throws XMLStreamException, IOException {
         String inputStr = "A,B\n1,2\n3,4\n";
-        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                + "<data>\n"
-                + "  <record>\n"
-                + "    <A>1</A>\n"
-                + "    <B>2</B>\n"
-                + "  </record>\n"
-                + "  <record>\n"
-                + "    <A>3</A>\n"
-                + "    <B>4</B>\n"
-                + "  </record>\n"
+        String expectedStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+                + "<data>"
+                + "<record>"
+                + "<A>1</A>"
+                + "<B>2</B>"
+                + "</record>"
+                + "<record>"
+                + "<A>3</A>"
+                + "<B>4</B>"
+                + "</record>"
                 + "</data>\n";
 
         InputStream is = new ByteArrayInputStream(inputStr.getBytes());

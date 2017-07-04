@@ -25,6 +25,8 @@ import javax.xml.stream.XMLStreamException;
  */
 public class Main {
 
+    private Main(){
+    }
 
     /**
      * @param args Arguments, currently, are not parsed.
