@@ -14,12 +14,12 @@ cat input.csv | bin/csv2xml.sh
 
 Write formatted xml to standard output:
 ```
-cat input.csv | bin/csv2xml.sh | xmlling --format -
+cat input.csv | bin/csv2xml.sh | xmllint --format -
 ```
 
 Store output in file:
 ```
-cat input.csv | bin/csv2xml.sh | xmlling --format - > output.xml
+cat input.csv | bin/csv2xml.sh | xmllint --format - > output.xml
 ```
 
 Process input given in ISO-8859-1 encoding:
