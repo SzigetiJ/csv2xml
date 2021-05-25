@@ -55,7 +55,7 @@ public class CsvToXml {
                 new InputStreamReader(is, CSVENCODING),
                 CSVFormat.RFC4180. // base settings
                 withRecordSeparator('\n'). // do not deal with \r
-                withHeader((String) null) // the first record will be used as the header
+                withSkipHeaderRecord(true) // the first record will be used as the header
         )) {
             Iterator<CSVRecord> recordIt = parser.iterator();
             CSVRecord header = recordIt.next();
